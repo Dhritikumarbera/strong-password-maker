@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+        .weak {
+            color: red;
+        }
+        .medium {
+            color: orange;
+        }
+        .strong {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Password Strength Checker</h1>
+    <input type="password" id="passwordInput" placeholder="Enter your password">
+    <button onclick="checkPasswordStrength()">Check</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        function checkPasswordStrength() {
+            var password = document.getElementById('passwordInput').value;
+            var resultElement = document.getElementById('result');
+            var strength = getPasswordStrength(password);
+            
+            resultElement.innerHTML = "Password Strength: " + strength.text;
+            resultElement.className = "result " + strength.className;
+        }
+
+        function getPasswordStrength(password) {
+            var strength = { text: "", className: "" };
+
+            if (password.length < 6) {
+                strength.text = "Weak";
+                strength.className = "weak";
+            } else if (password.length < 10) {
+                strength.text = "Medium";
+                strength.className = "medium";
+            } else {
+                strength.text = "Strong";
+                strength.className = "strong";
+            }
+
+            return strength;
+        }
+    </script>
+</body>
+</html>
